@@ -122,8 +122,8 @@
       <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 print-card">
         <div class="flex flex-wrap justify-between items-start gap-4 border-b border-slate-100 pb-5 mb-6">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Kiértékelt tanulási profil</span>
-            <h2 class="text-2xl font-bold text-slate-900 mt-0.5">Tanulási Stílus Eredmény – <span id="res-name"></span></h2>
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Egyéni kiértékelés</span>
+            <h2 class="text-2xl font-bold text-slate-900 mt-0.5">Tanulási Stílus Profil – <span id="res-name"></span></h2>
             <p id="res-date" class="text-xs text-slate-500 mt-1"></p>
           </div>
           <div class="flex gap-2 no-print">
@@ -136,36 +136,35 @@
           </div>
         </div>
 
-        <!-- Pókhálódiagram + Összehasonlító táblázat -->
+        <!-- Pókhálódiagram + Saját pontszámok táblázata -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-8">
           <div class="lg:col-span-6 bg-slate-50/70 rounded-2xl p-4 border border-slate-100">
-            <canvas id="radarChart" height="310"></canvas>
+            <canvas id="radarChart" height="300"></canvas>
           </div>
 
           <div class="lg:col-span-6">
-            <h3 class="font-bold text-base text-slate-800 mb-3">Skálák átlagai a viszonyítási sávhoz képest</h3>
-            <div class="overflow-x-auto rounded-xl border border-slate-200">
+            <h3 class="font-bold text-base text-slate-800 mb-3">Saját eredményeid a 9 tanulási területen (1–5 skálán)</h3>
+            <div class="overflow-hidden rounded-xl border border-slate-200">
               <table class="w-full text-sm text-left">
                 <thead class="bg-slate-100 text-slate-700 font-bold text-xs uppercase">
                   <tr>
                     <th class="py-2.5 px-3">Tanulási stílus</th>
-                    <th class="py-2.5 px-3 text-center">Saját átlag</th>
-                    <th class="py-2.5 px-3 text-center">Átlagos sáv</th>
-                    <th class="py-2.5 px-3 text-right">Besorolás</th>
+                    <th class="py-2.5 px-3">Erősség</th>
+                    <th class="py-2.5 px-3 text-right">Pontszám</th>
                   </tr>
                 </thead>
                 <tbody id="scores-tbody" class="divide-y divide-slate-100"></tbody>
               </table>
             </div>
             <p class="text-[11px] text-slate-400 mt-2">
-              *Ha a saját átlagod meghaladja az átlagos sáv felső határát (Max), az adott stílus kiemelt, preferált tanulási erősségként jelenik meg.
+              *A pontszámok 1,00 és 5,00 között mozognak; a magasabb érték erősebb egyéni preferenciát jelez.
             </p>
           </div>
         </div>
 
-        <!-- Preferált tanulási stílusok részletes jellemzése -->
+        <!-- 3 legerősebb tanulási stílus részletes jellemzése -->
         <div class="bg-sky-50/70 border border-sky-100 rounded-2xl p-5 md:p-6 mb-6">
-          <h3 id="preferred-heading" class="text-base font-bold text-sky-950 mb-3">⭐ Preferált tanulási stílusa(id) és javaslatok</h3>
+          <h3 class="text-base font-bold text-sky-950 mb-3">⭐ Legerősebb tanulási stílusa(id) és javaslatok</h3>
           <div id="preferred-cards" class="space-y-4"></div>
         </div>
 
@@ -262,63 +261,54 @@
         id: "s1",
         name: "Auditív-aktív",
         items: [{ q: 22, rev: false }, { q: 27, rev: true }, { q: 38, rev: false }, { q: 41, rev: false }],
-        avg: 3.57, max: 3.92, min: 3.22,
         desc: "Itt azt mérjük, hogy a tananyag hangos kimondása segíti-e a memóriafunkciókat. Fontos tudnunk, hogy reális veszély, ha a diák hallás után tanul, hogy túlzottan támaszkodik a tananyag szó szerinti megjegyzésére.\nHa azt észleljük, hogy tanulónk a tankönyv szavaival mondja el az anyagot, próbáljuk meg átfogalmaztatni vele. Más szavakba öntve kiderülhet számunkra, hogy valóban érti-e, amit visszamondott."
       },
       {
         id: "s2",
         name: "Auditív-befogadó",
         items: [{ q: 14, rev: true }, { q: 20, rev: false }, { q: 23, rev: false }, { q: 28, rev: false }],
-        avg: 3.67, max: 4.11, min: 3.23,
         desc: "Ez a skála a külső forrásokból származó hangingereket vizsgálja.\nA magas pontszámot elérőket a tananyag/feladat társakkal való átbeszélésekor a mások által elmondottak is segítik az eredményes elsajátításban.\nNekik ajánljuk a tananyag elektronikus rögzítését diktafonnal vagy telefonnal, és hogy tanuláskor hallgassák újra a hanganyagot."
       },
       {
         id: "s3",
         name: "Vizuális/ábra",
         items: [{ q: 2, rev: false }, { q: 5, rev: false }, { q: 19, rev: false }, { q: 25, rev: false }, { q: 37, rev: false }, { q: 47, rev: false }, { q: 50, rev: false }, { q: 55, rev: false }],
-        avg: 3.17, max: 3.73, min: 2.61,
         desc: "A téri információkon alapuló tanulássegítést mérő skálán magas pontszámot elérők a táblázatos formában közölt információkon túl a térben látható információkat is jól hasznosítják, például, amikor megmutatjuk a tanulnivalót, személtető eszközöket használunk, vagy bemutatunk egy kísérletet vagy egy matematikai művelet elvégzésének módját.\nA gondolattérkép az egyik leglátványosabb mód, ahogy ezt a fajta ingert biztosítani tudjuk számukra."
       },
       {
         id: "s4",
         name: "Vizuális/szöveg",
         items: [{ q: 3, rev: false }, { q: 4, rev: false }, { q: 12, rev: false }, { q: 30, rev: false }, { q: 32, rev: false }, { q: 43, rev: false }, { q: 48, rev: false }, { q: 52, rev: false }, { q: 54, rev: false }],
-        avg: 3.71, max: 4.03, min: 3.38,
         desc: "Az írott szöveg tanulásban játszott szerepét vizsgáljuk ezen a skálán, ez magába foglalja a tankönyv szövegét, a tanár táblai vázlatát, az interaktív táblán/kivetítőn megjelenő szövegeket vagy akár a diák által füzetbe írt vázlatot.\nEzek a stílusú tanulók, ha láthatják is a tanulnivalót szöveges formában, akkor könnyebben jegyzik meg. Ezért nem célszerű a tanári magyarázat alatt minden diákot arra köteleznünk, hogy csukják be a könyvet. Ha valamiért épp nem a könyv alapján tanítunk, akkor két dolog segíthet a tanári magyarázat hasznosításában. Egyrészt, ha táblai/kivetítős vázlattal kísérjük a magyarázatot, másrészt, ha a diák füzetébe készíti saját jegyzeteit."
       },
       {
         id: "s5",
         name: "Mozgás",
         items: [{ q: 8, rev: false }, { q: 11, rev: false }, { q: 15, rev: false }, { q: 18, rev: false }, { q: 21, rev: false }, { q: 26, rev: false }],
-        avg: 2.82, max: 3.25, min: 2.38,
         desc: "Ez a skála a tanulás közbeni mozgás lehetőségének tanulást segítő vagy gátló szerepét, és a mozgásos információ tanulását, a mozdulatok elsajátításának szerepét vizsgálja.\nA diákok számára a tanulás közben végzett mozgás is lehet hasznos. Ezt iskolai környezetben sokszor nehéz biztosítani, de nem lehetetlen.\nGondoljunk csak arra, hogy a verseket, idegen nyelv szavait néhány diáknak érdemes az iskolaudvaron vagy a teremben sétálgatva tanulni."
       },
       {
         id: "s6",
         name: "Csend",
         items: [{ q: 1, rev: true }, { q: 24, rev: false }, { q: 35, rev: false }, { q: 39, rev: false }, { q: 46, rev: true }, { q: 56, rev: true }],
-        avg: 3.46, max: 4.01, min: 2.92,
         desc: "A Csend skála a tanulást segítő körülmények hatását méri. Van, akit nagyon hátráltat a csend hiánya, még az is zavaró számára, ha a tanár egy másik tanulóval foglalkozik, vagy a többieknek magyaráz. Ezért érdemes az ilyen tanulókat a terem legcsendesebb részébe ültetni. A csendigény gátolhatja a csoportmunkát, hiszen velejárója az alapzaj. Próbáljuk ezeket a típusú diákokat is bevonni, hisz az iskolából kikerülve a munka világában egyáltalán nem biztos, hogy mindig lehetőségük lesz az önálló, csendes munkára."
       },
       {
         id: "s7",
         name: "Társas",
         items: [{ q: 10, rev: false }, { q: 16, rev: true }, { q: 29, rev: false }, { q: 33, rev: false }, { q: 44, rev: true }, { q: 57, rev: false }],
-        avg: 3.19, max: 3.60, min: 2.78,
         desc: "A Társas skála a csoport- vagy egyéni munkával kapcsolatos viszonyunkat méri.\nAzok a tanulók, akik szívesen dolgoznak társakkal, könnyen motiválhatóak is a tanulásra, ha ilyen tanulási helyzeteket teremtünk.\nKönnyedén működtethetjük kooperatív óráinkat olyan közösségben, ahol zömében a Társas skálán magas pontszámot elérő tanulók ülnek."
       },
       {
         id: "s8",
         name: "Értelmes",
         items: [{ q: 6, rev: false }, { q: 9, rev: false }, { q: 13, rev: false }, { q: 17, rev: false }, { q: 34, rev: false }, { q: 36, rev: false }, { q: 40, rev: false }, { q: 45, rev: false }, { q: 51, rev: false }, { q: 53, rev: false }],
-        avg: 3.53, max: 3.87, min: 3.20,
         desc: "Ez a skála a tananyag tartalmi feldolgozásának szintjét vizsgálja.\nA legfontosabb célunk lehet, hogy a diákok valóban értsék is a megtanultakat, ne csak bemagoljanak egy-egy anyagot, hanem lássák az összefüggéseket is."
       },
       {
         id: "s9",
         name: "Intuitív",
         items: [{ q: 7, rev: false }, { q: 31, rev: false }, { q: 42, rev: false }, { q: 49, rev: true }],
-        avg: 2.90, max: 3.38, min: 2.44,
         desc: "Ez a skála az intuitív és analitikus gondolkodási stratégia megkülönböztetésén alapul. Az analitikus gondolkodás jellemzője a szisztematikusan, formális logikai elveken, lépésenként felépített problémamegoldás. Az intuitív személy ezzel szemben heurisztikusan gondolkodik, nem tudja lépésekre bontani a gondolkodás folyamatát, feladatmegoldása mégis hatékony.\nA kreatív, a szokatlan megoldásokat igénylő helyzetekben az intuitív tanulók hatékonyabbak, jobban teljesítenek, ezért próbáljunk meg teret engedni ennek a feldolgozási stílusnak is az analitikus gondolkodás alapvető dominanciája mellett."
       }
     ];
@@ -463,15 +453,11 @@
           return item.rev ? (6 - raw) : raw;
         });
         const sum = values.reduce((a, b) => a + b, 0);
-        const ownAvg = Number((sum / values.length).toFixed(2));
-        const isPreferred = ownAvg > scale.max;
-        const isBelow = ownAvg < scale.min;
+        const ownScore = Number((sum / values.length).toFixed(2));
 
         return {
           ...scale,
-          ownAvg,
-          isPreferred,
-          isBelow
+          ownScore
         };
       });
     }
@@ -482,10 +468,10 @@
 
     async function finishQuiz() {
       const results = calculateResults();
-      const preferred = results.filter(r => r.isPreferred);
-      const preferredText = preferred.length > 0
-        ? preferred.map(r => `${r.name} (${r.ownAvg.toFixed(2)})`).join(", ")
-        : "Nincs az átlagos sáv fölé kiugró skála (kiegyensúlyozott profil)";
+      const sorted = [...results].sort((a, b) => b.ownScore - a.ownScore);
+      const top3 = sorted.slice(0, 3);
+      const top3Ids = new Set(top3.map(r => r.id));
+      const preferredText = top3.map(r => `${r.name} (${r.ownScore.toFixed(2)})`).join(", ");
 
       document.getElementById("quiz-section").classList.add("hidden");
       document.getElementById("result-section").classList.remove("hidden");
@@ -494,68 +480,43 @@
       document.getElementById("res-name").textContent = studentName;
       document.getElementById("res-date").textContent = "Kitöltés ideje: " + new Date().toLocaleString("hu-HU");
 
-      // Táblázat feltöltése
-      document.getElementById("scores-tbody").innerHTML = results.map(r => {
-        let badge = `<span class="inline-block px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">Átlagos sávban</span>`;
-        if (r.isPreferred) {
-          badge = `<span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">⭐ Preferált</span>`;
-        } else if (r.isBelow) {
-          badge = `<span class="inline-block px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">Átlag alatti</span>`;
-        }
+      // Táblázat feltöltése (csökkenő sorrendben a saját pontszám alapján)
+      document.getElementById("scores-tbody").innerHTML = sorted.map(r => {
+        const isTop = top3Ids.has(r.id);
+        const widthPct = ((r.ownScore - 1) / 4) * 100;
 
         return `
-          <tr class="${r.isPreferred ? 'bg-emerald-50/40 font-semibold' : ''}">
-            <td class="py-2.5 px-3 text-slate-800">${r.name}</td>
-            <td class="py-2.5 px-3 text-center font-bold text-sky-700">${r.ownAvg.toFixed(2)}</td>
-            <td class="py-2.5 px-3 text-center text-slate-500 text-xs">${r.min.toFixed(2)} – ${r.max.toFixed(2)}</td>
-            <td class="py-2.5 px-3 text-right">${badge}</td>
+          <tr class="${isTop ? 'bg-sky-50/50 font-semibold' : ''}">
+            <td class="py-2.5 px-3 text-slate-800">${isTop ? '★ ' : ''}${r.name}</td>
+            <td class="py-2.5 px-3 w-36 sm:w-44">
+              <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                <div class="${isTop ? 'bg-sky-600' : 'bg-slate-400'} h-full rounded-full" style="width: ${widthPct}%"></div>
+              </div>
+            </td>
+            <td class="py-2.5 px-3 text-right font-bold ${isTop ? 'text-sky-700' : 'text-slate-700'}">${r.ownScore.toFixed(2)} / 5,00</td>
           </tr>
         `;
       }).join("");
 
-      // Preferált stílusok kártyák
-      const prefContainer = document.getElementById("preferred-cards");
-      if (preferred.length > 0) {
-        document.getElementById("preferred-heading").textContent = "⭐ Preferált tanulási stílusa(id) és javaslatok";
-        prefContainer.innerHTML = preferred.map(r => `
-          <div class="bg-white rounded-xl p-4 md:p-5 border border-sky-200 shadow-xs">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <h4 class="font-bold text-base text-slate-900">${r.name}</h4>
-              <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
-                Saját átlag: ${r.ownAvg.toFixed(2)} (Norma Max: ${r.max.toFixed(2)})
-              </span>
-            </div>
-            <div class="text-sm text-slate-700 leading-relaxed">${formatParagraphs(r.desc)}</div>
+      // 3 legerősebb tanulási stílus kártyák
+      document.getElementById("preferred-cards").innerHTML = top3.map((r, idx) => `
+        <div class="bg-white rounded-xl p-4 md:p-5 border border-sky-200 shadow-xs">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <h4 class="font-bold text-base text-slate-900">${idx + 1}. ${r.name}</h4>
+            <span class="text-xs font-bold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">
+              Saját pontszám: ${r.ownScore.toFixed(2)} / 5,00
+            </span>
           </div>
-        `).join("");
-      } else {
-        // Ha egyik sem lépi túl szigorúan a Max értéket, megmutatjuk a 2 legmagasabb pontszámú stílust
-        const top2 = [...results].sort((a, b) => b.ownAvg - a.ownAvg).slice(0, 2);
-        document.getElementById("preferred-heading").textContent = "💡 Kiegyensúlyozott profil – Legerősebb területeid";
-        prefContainer.innerHTML = `
-          <p class="text-sm text-slate-700 mb-3">
-            Egyik skálád sem lépi túl szélsőségesen az átlagos sáv felső határát, ami azt jelzi, hogy rugalmasan többféle tanulási módszert is tudsz alkalmazni. A két legmagasabb értéked:
-          </p>
-          ${top2.map(r => `
-            <div class="bg-white rounded-xl p-4 md:p-5 border border-sky-200">
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <h4 class="font-bold text-base text-slate-900">${r.name}</h4>
-                <span class="text-xs font-bold bg-sky-100 text-sky-800 px-3 py-1 rounded-full">
-                  Saját átlag: ${r.ownAvg.toFixed(2)} (Átlag: ${r.avg.toFixed(2)})
-                </span>
-              </div>
-              <div class="text-sm text-slate-700 leading-relaxed">${formatParagraphs(r.desc)}</div>
-            </div>
-          `).join("")}
-        `;
-      }
+          <div class="text-sm text-slate-700 leading-relaxed">${formatParagraphs(r.desc)}</div>
+        </div>
+      `).join("");
 
       // Összes skála leírása
-      document.getElementById("all-scales-desc").innerHTML = results.map(r => `
+      document.getElementById("all-scales-desc").innerHTML = sorted.map(r => `
         <div class="bg-white p-4 rounded-xl border border-slate-200">
           <div class="flex justify-between items-center mb-1.5">
             <h4 class="font-bold text-sm text-slate-900">${r.name}</h4>
-            <span class="text-xs font-bold text-sky-700">${r.ownAvg.toFixed(2)}</span>
+            <span class="text-xs font-bold text-sky-700">${r.ownScore.toFixed(2)}</span>
           </div>
           <div class="text-xs text-slate-600 leading-relaxed">${formatParagraphs(r.desc)}</div>
         </div>
@@ -575,30 +536,12 @@
           labels: results.map(r => r.name),
           datasets: [
             {
-              label: "Saját átlag",
-              data: results.map(r => r.ownAvg),
+              label: "Saját eredmény",
+              data: results.map(r => r.ownScore),
               backgroundColor: "rgba(2, 132, 199, 0.22)",
               borderColor: "rgba(2, 132, 199, 1)",
               pointBackgroundColor: "rgba(2, 132, 199, 1)",
               borderWidth: 2.5
-            },
-            {
-              label: "Átlagos érték",
-              data: results.map(r => r.avg),
-              backgroundColor: "transparent",
-              borderColor: "rgba(100, 116, 139, 0.8)",
-              borderDash: [5, 5],
-              pointRadius: 2,
-              borderWidth: 1.5
-            },
-            {
-              label: "Preferált küszöb (Max)",
-              data: results.map(r => r.max),
-              backgroundColor: "transparent",
-              borderColor: "rgba(16, 185, 129, 0.75)",
-              borderDash: [2, 3],
-              pointRadius: 2,
-              borderWidth: 1.5
             }
           ]
         },
@@ -613,10 +556,7 @@
             }
           },
           plugins: {
-            legend: {
-              position: "bottom",
-              labels: { boxWidth: 12, font: { size: 11 } }
-            }
+            legend: { display: false }
           }
         }
       });
@@ -635,7 +575,7 @@
       banner.innerHTML = "<span>⏳ Eredmények rögzítése a tanári Google Táblázatba...</span>";
 
       const scoreMap = {};
-      results.forEach(r => { scoreMap[r.id] = r.ownAvg; });
+      results.forEach(r => { scoreMap[r.id] = r.ownScore; });
 
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
